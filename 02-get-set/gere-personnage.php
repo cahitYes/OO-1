@@ -18,9 +18,9 @@ $bilel->setForcePerso(250);
 echo $bilel->getForcePerso();
 
 echo "<hr>";
-$bilel->setDegats(1);
+$bilel->setDegats(15);
 echo $bilel->getDegats();
 
 echo "<hr>";
-$bilel->setNiveau('rez-de-chaussée');
+$bilel->setNiveau(1);
 echo $bilel->getNiveau();

@@ -59,13 +59,13 @@ class Personnage
 
     public function setNom($s)
     {
-        if (is_string($s) && strlen($s) > 4 && strlen($s) < 100) {
+        if (is_string($s) && strlen($s) >= 4 && strlen($s) < 100) {
             // remplissage de l'instance
             $this->nom = $s;
         } else {
             // création d'une exception
             trigger_error("Nom non conforme", E_USER_NOTICE);
-            //throw new Exception("Nom non conforme", E_USER_NOTICE);
+            //throw new Exception("Nom non conforme");
         }
     }
     public function setForcePerso($f)
@@ -101,10 +101,26 @@ class Personnage
     private function createSkill()
     {
         // changement de l'attribut de l'instance ($this = instance) avec la constante VIE_DE_BASE (self = la classe) + une valeur au hasard
-        $this->vie = self::VIE_DE_BASE + mt_rand(-300, 300);
+        $this->vie = self::VIE_DE_BASE + mt_rand(-150, 150);
         $this->niveau = 1;
         $this->experience = 0;
         $this->forcePerso = mt_rand(25, 30);
         $this->degats = mt_rand(5, 10);
+    }
+
+    // on va donner la possibilité à une instance de Personne de frapper son adversaire
+    public function frappeAutre(Personnage $autre)
+    {
+        $forcePerso = $this->forcePerso + $this->dice();
+    }
+
+    // jet de dé (side = face et roll = nombre de jet)
+    private function dice(int $side = 20, int $roll = 1)
+    {
+        $force = 0;
+        for ($i = 0; $i < $roll; $i++) {
+            $force += mt_rand(1, ($side + $this->niveau));
+        }
+        return $force;
     }
 }

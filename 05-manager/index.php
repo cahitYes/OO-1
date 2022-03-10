@@ -14,8 +14,7 @@ require_once "Personnage.php";
 
 <body>
     <?php
-    // appel d'une méthode static, ce qui permet d'avoir accès à une méthode de la classe sans l'instancier !
-    echo Personnage::dice();
+
     ?>
 </body>
 

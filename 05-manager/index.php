@@ -1,14 +1,18 @@
 <?php
+// chargement des dépendances
 require_once "config.php";
 require_once "Personnage.php";
 require_once "PersonnageManager.php";
 
-try{
-    $db = new PDO(DB_TYPE.':dbname='.DB_NAME.';host='.DB_HOST.';charset='.DB_CHARSET.';port='.DB_PORT,DB_LOGIN,DB_PWD);
-}catch(Exception $e){
+// tentative de connexion à notre DB
+try {
+    $db = new PDO(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=' . DB_CHARSET . ';port=' . DB_PORT, DB_LOGIN, DB_PWD);
+} catch (Exception $e) {
     die($e->getMessage());
 }
 
+// Instanciation de notre manager avec la connexion PDO
+$persoManager = new PersonnageManager($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,15 +25,20 @@ try{
 </head>
 
 <body>
-    <?php
-    // Instantiation
-    $joel = new Personnage(null,"Joel",10,25.3,1,0,1);
-    $mahmoud = new Personnage(null,"Mahmoud",12,21.8,1,0,1);
-    // ne fonctionne que parce qu'on a mis un __toString()
-    echo $joel;
-    echo "<hr>$mahmoud";
-    var_dump($db,$joel,$mahmoud);
-    ?>
+<?php
+// Instantiation
+$joel = new Personnage(null, "Joel", 10, 25.3, 1, 0, 1);
+$mahmoud = new Personnage(null, "Mahmoud", 12, 21.8, 1, 0, 1);
+// ne fonctionne que parce qu'on a mis un __toString()
+echo $joel;
+echo "<hr>$mahmoud<hr>";
+
+// on tente d'insérer Joël
+$persoManager->insertPersonnage($joel);
+
+var_dump($db, $persoManager, $joel, $mahmoud);
+
+?>
 </body>
 
 </html>

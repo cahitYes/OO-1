@@ -1,6 +1,5 @@
 <?php
 // mapping de la table personnage en PHP 8.0
-use JetBrains\PhpStorm\Pure;
 
 class Personnage
 {
@@ -23,16 +22,15 @@ class Personnage
     // constructeur - Appelé lors de l'instanciation
 
 
-
-    // getters
     /**
-     * @param int $idPersonnage
+     * @param int|null $idPersonnage
      * @param string $nom
      * @param int $forcePerso
      * @param float $degats
      * @param int $niveau
      * @param int $experience
      * @param int $vie
+     * @throws Exception
      */
     public function __construct(int|null $idPersonnage, string $nom, int $forcePerso, float $degats, int $niveau, int $experience, int $vie)
     {
@@ -51,9 +49,12 @@ class Personnage
      * si on essaye d'afficher l'instance comme du texte
      * @return string
      */
-    public function __toString(): string {
-        return "Je suis une instance de ".$this->getNom();
+    public function __toString(): string
+    {
+        return "Je suis une instance de " . $this->getNom();
     }
+
+    // Getters
 
     /**
      * @return int|null
@@ -133,9 +134,9 @@ class Personnage
      */
     public function setNom(string $nom): Personnage
     {
-        if(strlen($nom)>=4 && strlen($nom)<=60){
+        if (strlen($nom) >= 4 && strlen($nom) <= 60) {
             $this->nom = $nom;
-        }else{
+        } else {
             throw new Exception("Le nom doit être composé de 4 à 60 caractères");
         }
 

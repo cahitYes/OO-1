@@ -1,9 +1,11 @@
 <?php
+// mapping de la table personnage en PHP 8.0
+use JetBrains\PhpStorm\Pure;
 
 class Personnage
 {
     // Attributs ou propriétés, en général toujours private (ou protected qu'on verra lors des extends) - À partir de PHP 7.4, on type nos attributs : https://www.php.net/manual/fr/migration74.new-features.php
-    private int $idPersonnage;
+    private int|null $idPersonnage; // le choix est possible autrement qu'avec ?int (int ou null en php 7)
     private string $nom;
     private int $forcePerso;
     private float $degats;
@@ -18,19 +20,45 @@ class Personnage
     // méthodes
 
 
-    // constructeur
-    public function __construct()
-    {
+    // constructeur - Appelé lors de l'instanciation
 
-    }
 
 
     // getters
+    /**
+     * @param int $idPersonnage
+     * @param string $nom
+     * @param int $forcePerso
+     * @param float $degats
+     * @param int $niveau
+     * @param int $experience
+     * @param int $vie
+     */
+    public function __construct(int|null $idPersonnage, string $nom, int $forcePerso, float $degats, int $niveau, int $experience, int $vie)
+    {
+        // utilisation de tous les setters pour hydrater un Personnage
+        $this->setIdPersonnage($idPersonnage);
+        $this->setNom($nom);
+        $this->setForcePerso($forcePerso);
+        $this->setDegats($degats);
+        $this->setNiveau($niveau);
+        $this->setExperience($experience);
+        $this->setVie($vie);
+    }
+
 
     /**
-     * @return int
+     * si on essaye d'afficher l'instance comme du texte
+     * @return string
      */
-    public function getIdPersonnage(): int
+    public function __toString(): string {
+        return "Je suis une instance de ".$this->getNom();
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdPersonnage(): int|null
     {
         return $this->idPersonnage;
     }
@@ -83,26 +111,34 @@ class Personnage
         return $this->vie;
     }
 
+
+
+    // setters
+
     /**
-     * @param int $idPersonnage
+     * @param int|null $idPersonnage
      * @return Personnage
      */
-    public function setIdPersonnage(int $idPersonnage): Personnage
+    public function setIdPersonnage(int|null $idPersonnage): Personnage
     {
         $this->idPersonnage = $idPersonnage;
         return $this;
     }
 
 
-    // setters
-
     /**
      * @param string $nom
      * @return Personnage
+     * Minimum 4 , maximum 60 caractères
      */
     public function setNom(string $nom): Personnage
     {
-        $this->nom = $nom;
+        if(strlen($nom)>=4 && strlen($nom)<=60){
+            $this->nom = $nom;
+        }else{
+            throw new Exception("Le nom doit être composé de 4 à 60 caractères");
+        }
+
         return $this;
     }
 

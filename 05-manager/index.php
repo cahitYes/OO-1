@@ -14,7 +14,11 @@ require_once "Personnage.php";
 
 <body>
     <?php
-
+    // Instantiation
+    $joel = new Personnage(null,"Joel",10,25.3,1,0,1);
+    $mahmoud = new Personnage(null,"Mahmoud",12,21.8,1,0,1);
+    echo $joel;
+    var_dump($joel,$mahmoud);
     ?>
 </body>
 

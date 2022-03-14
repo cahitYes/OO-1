@@ -27,6 +27,15 @@ $persoManager = new PersonnageManager($db);
 <body>
 <?php
 // Instantiation
+
+try {
+// erreur
+    $joe = new Personnage(null, "Joe", 10, 25.3, 1, 0, 1);
+}catch(Exception $e){
+    // affichage de l'erreur
+    echo "<hr>".$e->getMessage()."<hr>";
+}
+
 $joel = new Personnage(null, "Joel", 10, 25.3, 1, 0, 1);
 $mahmoud = new Personnage(null, "Mahmoud", 12, 21.8, 1, 0, 1);
 // ne fonctionne que parce qu'on a mis un __toString()

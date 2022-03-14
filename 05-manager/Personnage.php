@@ -134,8 +134,9 @@ class Personnage
      */
     public function setNom(string $nom): Personnage
     {
+        $nom = strip_tags(trim($nom));
         if (strlen($nom) >= 4 && strlen($nom) <= 60) {
-            $this->nom = $nom;
+            $this->nom = htmlspecialchars($nom,ENT_QUOTES);
         } else {
             throw new Exception("Le nom doit être composé de 4 à 60 caractères");
         }

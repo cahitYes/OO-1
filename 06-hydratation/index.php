@@ -25,7 +25,25 @@ $persoManager = new PersonnageManager($db);
 </head>
 
 <body>
+<?php
+$cahit = new Personnage([
+        "lulu"=>"lala",
+        "youpiCaBoum"=>"yes",
+        "slup"=>25.25,
+        "vie"=>5,
+        25=>"jkhjih",
+        "nom"=>"pause",
+]);
 
+var_dump($cahit);
+
+?><hr>
+<?php
+$recupOne = $persoManager->SelectPersonnage(46,'Joelina');
+var_dump($recupOne);
+$joueur1 = new Personnage($recupOne);
+var_dump($joueur1);
+?>
 </body>
 
 </html>

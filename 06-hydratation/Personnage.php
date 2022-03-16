@@ -20,30 +20,27 @@ class Personnage
 
 
     // constructeur - Appelé lors de l'instanciation
-
-
-    /**
-     * @param int|null $idPersonnage
-     * @param string $nom
-     * @param int $forcePerso
-     * @param float $degats
-     * @param int $niveau
-     * @param int $experience
-     * @param int $vie
-     * @throws Exception
-     */
-    public function __construct(int|null $idPersonnage, string $nom, int $forcePerso, float $degats, int $niveau, int $experience, int $vie)
+    public function __construct(array $tab)
     {
-        // utilisation de tous les setters pour hydrater un Personnage
-        $this->setIdPersonnage($idPersonnage);
-        $this->setNom($nom);
-        $this->setForcePerso($forcePerso);
-        $this->setDegats($degats);
-        $this->setNiveau($niveau);
-        $this->setExperience($experience);
-        $this->setVie($vie);
+        // tentative d'hydration des données de Personnage
+        $this->hydrate($tab);
     }
 
+    // création de notre hydratation, en partant d'un tableau associatif et de ses clefs, on va régénérer le nom des setters existants
+    private function hydrate(array $assoc){
+        // tant qu'on a des éléments dans le tableau
+        foreach($assoc as $clef => $valeur){
+            // création du nom de la méthode
+            echo $methodeName = "set".ucfirst($clef);
+            // si la méthode existe
+            if(method_exists($this,$methodeName)){
+                $this->$methodeName($valeur);
+                echo " ".$this->$clef."<br>";
+            }else{
+                echo " n'existe pas<br>";
+            }
+        }
+    }
 
     /**
      * si on essaye d'afficher l'instance comme du texte

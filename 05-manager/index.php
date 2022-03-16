@@ -67,10 +67,29 @@ var_dump($allPersonnage);
 $onePersonnage = $persoManager->SelectPersonnage(1,"Joel");
 var_dump($onePersonnage);
 
+// on récupère un personnage de la DB mais qui ne fonctionne pas
 $onePersonnage = $persoManager->SelectPersonnage(2,"Joel");
 var_dump($onePersonnage);
 
 var_dump($db, $persoManager, $joel, $mahmoud);
+
+echo "<hr> On veut récupérer Mahmoud, mais le retransformer en instance de Personnage<hr>";
+
+$onePersonnage = $persoManager->SelectPersonnage(11,"Mahmoud");
+if(is_array($onePersonnage)){
+    $recupMahmoud = new Personnage(
+            $onePersonnage['idPersonnage'],
+            $onePersonnage['nom'],
+            $onePersonnage['forcePerso'],
+            $onePersonnage['degats'],
+            $onePersonnage['niveau'],
+            $onePersonnage['experience'],
+            $onePersonnage['vie'],
+
+    );
+    var_dump($recupMahmoud);
+}
+
 
 ?>
 </body>

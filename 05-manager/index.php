@@ -29,21 +29,46 @@ $persoManager = new PersonnageManager($db);
 // Instantiation
 
 try {
-// erreur
+// instanciation avec gestion du risque d'erreur
     $joe = new Personnage(null, "Joe", 10, 25.3, 1, 0, 1);
 }catch(Exception $e){
     // affichage de l'erreur
     echo "<hr>".$e->getMessage()."<hr>";
 }
 
-$joel = new Personnage(null, "Joel", 10, 25.3, 1, 0, 1);
+$joel = new Personnage(null, "Joelina", 10, 25.3, 1, 0, 1);
 $mahmoud = new Personnage(null, "Mahmoud", 12, 21.8, 1, 0, 1);
-// ne fonctionne que parce qu'on a mis un __toString()
+// ne fonctionne que parce qu'on a mis un __toString() dans Personnage pour que l'objet renvoie du texte en cas de tentative d'affichage
 echo $joel;
 echo "<hr>$mahmoud<hr>";
 
-// on tente d'insérer Joël
-$persoManager->insertPersonnage($joel);
+// on tente d'insérer Joël, on a ajouté un message d'erreur au cas où ça ne fonctionne pas (retour bool mais avec un echo en cas d'échec)
+$insertJoel = $persoManager->insertPersonnage($joel);
+if($insertJoel===true){
+    echo $joel->getNom()." est bien insérée dans notre table";
+}else{
+    // duplicate content ()
+    if($insertJoel==23000){
+        echo $joel->getNom()." : Ce nom d'utilisateur est déjà pris!";
+    }else{
+        echo "Erreur inconnue";
+    }
+}
+// insertion de Mahmoud
+$persoManager->insertPersonnage($mahmoud);
+
+// on récupère mes Personnage de la DB
+$allPersonnage = $persoManager->SelectAllPersonnage();
+
+// affichage des personnages
+var_dump($allPersonnage);
+
+// on récupère un personnage de la DB
+$onePersonnage = $persoManager->SelectPersonnage(1,"Joel");
+var_dump($onePersonnage);
+
+$onePersonnage = $persoManager->SelectPersonnage(2,"Joel");
+var_dump($onePersonnage);
 
 var_dump($db, $persoManager, $joel, $mahmoud);
 

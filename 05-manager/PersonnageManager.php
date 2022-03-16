@@ -16,8 +16,8 @@ class PersonnageManager
         $this->connection = $connection;
     }
 
-
-    public function insertPersonnage(Personnage $item): bool
+    // insertion d'un Personnage
+    public function insertPersonnage(Personnage $item): bool|int
     {
         // request
         $sql = "INSERT INTO `personnage`(`idPersonnage`, `nom`, `forcePerso`, `degats`, `niveau`, `experience`, `vie`) VALUES (?,?,?,?,?,?,?)";
@@ -33,21 +33,30 @@ class PersonnageManager
             $prepare->bindValue(6,$item->getExperience(),PDO::PARAM_INT);
             $prepare->bindValue(7,$item->getVie(),PDO::PARAM_INT);
             $prepare->execute();
-
-        }catch(Exception $e){
-            echo "Echec lors de l'insertion : ".$e->getMessage();
-            return false;
-        } finally {
             return true;
+        }catch(Exception $e){
+            return $e->getCode();
         }
 
     }
 
-    public function SelectAllPersonnage(){
-
+    public function SelectAllPersonnage(): array{
+        $sql = "SELECT * FROM `personnage` ORDER BY `idPersonnage` ASC";
+        $request = $this->connection->query($sql);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function SelectPersonnage(Personnage $item){
-
+    public function SelectPersonnage(int $id, string $name): array|string {
+        $sql = "SELECT * FROM `personnage` WHERE `idPersonnage` = ? AND `nom` = ? ;";
+        $prepare = $this->connection->prepare($sql);
+        try {
+            $prepare->execute([
+                $id,
+                $name,
+            ]);
+            return $prepare->fetch(PDO::FETCH_ASSOC);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 }

@@ -20,19 +20,20 @@ class PersonnageManager
     public function insertPersonnage(Personnage $item): bool|int
     {
         // request
-        $sql = "INSERT INTO `personnage`(`idPersonnage`, `nom`, `forcePerso`, `degats`, `niveau`, `experience`, `vie`) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO `personnage`(`nom`, `forcePerso`, `degats`, `niveau`, `experience`, `vie`) VALUES (?,?,?,?,?,?)";
         // requête préparée
         $prepare = $this->connection->prepare($sql);
 
         try{
-            $prepare->bindValue(1,$item->getIdPersonnage(),PDO::PARAM_INT);
-            $prepare->bindValue(2,$item->getNom(),PDO::PARAM_STR);
-            $prepare->bindValue(3,$item->getForcePerso(),PDO::PARAM_INT);
-            $prepare->bindValue(4,$item->getDegats());
-            $prepare->bindValue(5,$item->getNiveau(),PDO::PARAM_INT);
-            $prepare->bindValue(6,$item->getExperience(),PDO::PARAM_INT);
-            $prepare->bindValue(7,$item->getVie(),PDO::PARAM_INT);
-            $prepare->execute();
+            $prepare->execute([
+                $item->getNom(),
+                $item->getForcePerso(),
+                $item->getDegats(),
+                $item->getNiveau(),
+                $item->getExperience(),
+                $item->getVie(),
+
+            ]);
             return true;
         }catch(Exception $e){
             return $e->getCode();

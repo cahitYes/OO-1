@@ -13,6 +13,9 @@ try {
 
 // Instanciation de notre manager avec la connexion PDO
 $persoManager = new PersonnageManager($db);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +40,37 @@ $cahit = new Personnage([
 
 var_dump($cahit);
 
+
+
 ?><hr>
 <?php
 $recupOne = $persoManager->SelectPersonnage(46,'Joelina');
 var_dump($recupOne);
 $joueur1 = new Personnage($recupOne);
 var_dump($joueur1);
+?>
+<h3>Insertion depuis un formulaire</h3>
+<form action="" method="post" name="balek">
+
+    <input name='nom' type="text" placeholder="votre nom"><br>
+    <input name='forcePerso' type="number" placeholder=forcePerso><br>
+    <input name='degats' type="number" placeholder='degats'><br>
+    <input name='niveau' type="number" placeholder='niveau'><br>
+    <input name='experience' type="number" placeholder='experience'><br>
+    <input name='vie' type="number" placeholder='vie'><br>
+    <input type="submit" value="créer le personnage">
+</form>
+<?php
+
+// si on a envoyé le formulaire
+if(!empty($_POST)){
+    // instanciation des valeurs passée par le formulaire
+    $insert = new Personnage($_POST);
+    var_dump($insert);
+    // insertion dans la DB
+    echo $persoManager->insertPersonnage($insert);
+
+}
 ?>
 </body>
 

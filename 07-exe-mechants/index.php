@@ -2,6 +2,7 @@
 // chargement des dépendances
 require_once "config.php";
 require_once "Mechant.php";
+require_once "MechantManager.php";
 
 // tentative de connexion à notre DB
 try {
@@ -11,8 +12,10 @@ try {
 }
 
 // Instanciation de notre manager avec la connexion PDO
-// $persoManager = new PersonnageManager($db);
+$mechantManager = new MechantManager($db);
 
+// On va récupérer tous les méchants ordonnés par `experienceMechant` ascendant
+$recupAllMechants = $mechantManager->getMechants();
 
 
 ?>
@@ -27,25 +30,38 @@ try {
 </head>
 
 <body>
-<?php
-// instanciations de la classe Mechant avec new, le constructeur est donc appelé par défaut et utilisera ce qu'il y a entre parenthèse si nécessaire
-$cahit = new Mechant(["nameMechant"=>"Cahit","zut"=>"DELETE "]);
-$quentin = new Mechant(["nameMechant"=>"Quentin"]);
-
-var_dump($cahit,$quentin);
-
-
-
-?><hr>
-<?php
-
-?>
 <h3>Insertion depuis un formulaire dans Mechant</h3>
 <form action="" method="post" name="balek">
+    <label for="nameMechant">nameMechant : <input type="text" name="nameMechant" id="nameMechant" required></label><br>
+    <label for="forceMechant">forceMechant : <input type="number" min="1" max="9999" name="forceMechant"
+                                                    id="forceMechant" required></label><br>
+    <label for="experienceMechant">experienceMechant : <input type="number" min="1" max="9999" name="experienceMechant"
+                                                              id="experienceMechant" required></label><br>
+    <label for="statusMechant">statusMechant : <select name="statusMechant" id="statusMechant" required>
+            <option value="1">Actif</option>
+            <option value="0">Non Actif</option>
+        </select></label><br>
+    <input type="submit" value="create Mechant !">
 
 </form>
+<?php
 
-<h3>Affichez tous les méchants !</h3>
+
+?>
+<hr>
+<h3>Les méchants existants</h3>
+<?php
+foreach ($recupAllMechants as $item):
+    ?>
+    <h4><?= $item['nameMechant'] ?> (ID:<?= $item['idMechant'] ?>)</h4>
+    <p>Force : <?= $item['forceMechant'] ?></p>
+    <p>Expérience : <?= $item['experienceMechant'] ?></p>
+    <p>Statut : <?= $item['statusMechant'] ?></p>
+<?php
+endforeach;
+?>
+
+
 </body>
 
 </html>

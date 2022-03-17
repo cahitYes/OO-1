@@ -17,6 +17,8 @@ class Mechant
     private bool|int $statusMechant;
 
 
+
+
     // Constantes
 
 
@@ -30,7 +32,7 @@ class Mechant
      * Méthodes magiques
      */
 
-    public function __construct(array $datasMechant=[])
+    public function __construct(array $datasMechant = [])
     {
         $this->hydratation($datasMechant);
     }
@@ -38,8 +40,17 @@ class Mechant
     /**
      * Méthode d'hydratation
      */
-    private function hydratation(array $tab){
-        var_dump($tab);
+    private function hydratation(array $tab)
+    {
+        foreach ($tab as $key => $value) {
+            echo $nameSetter = "set" . ucfirst($key)."('$value')<br>";
+            $setterName = "set".ucfirst($key);
+            if(method_exists($this,$setterName)){
+                // utilisation du setter autogénéré
+                $this->$setterName($value);
+            }
+        }
+
     }
 
     /**
@@ -133,7 +144,6 @@ class Mechant
     {
         $this->statusMechant = $statusMechant;
     }
-
 
 
 }

@@ -29,8 +29,8 @@ try {
 <body>
 <?php
 // instanciations de la classe Mechant avec new, le constructeur est donc appelé par défaut et utilisera ce qu'il y a entre parenthèse si nécessaire
-$cahit = new Mechant();
-$quentin = new Mechant(["Quentin","Cahit"]);
+$cahit = new Mechant(["nameMechant"=>"Cahit","zut"=>"DELETE "]);
+$quentin = new Mechant(["nameMechant"=>"Quentin"]);
 
 var_dump($cahit,$quentin);
 

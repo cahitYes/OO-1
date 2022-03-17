@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Mapping de la table `jeuxoo`.`mechant`
+ */
 class Mechant
 {
     /**
@@ -14,15 +17,30 @@ class Mechant
     private bool|int $statusMechant;
 
 
-
-
     // Constantes
+
 
     /**
      *
      * Méthodes
      *
      */
+
+    /**
+     * Méthodes magiques
+     */
+
+    public function __construct(array $datasMechant=[])
+    {
+        $this->hydratation($datasMechant);
+    }
+
+    /**
+     * Méthode d'hydratation
+     */
+    private function hydratation(array $tab){
+        var_dump($tab);
+    }
 
     /**
      *

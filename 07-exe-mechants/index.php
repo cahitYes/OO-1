@@ -1,7 +1,7 @@
 <?php
 // chargement des dépendances
 require_once "config.php";
-// ...
+require_once "Mechant.php";
 
 // tentative de connexion à notre DB
 try {
@@ -28,16 +28,11 @@ try {
 
 <body>
 <?php
-$cahit = new Mechant([
-        "lulu"=>"lala",
-        "youpiCaBoum"=>"yes",
-        "slup"=>25.25,
-        "vie"=>5,
-        25=>"jkhjih",
-        "nom"=>"pause",
-]);
+// instanciations de la classe Mechant avec new, le constructeur est donc appelé par défaut et utilisera ce qu'il y a entre parenthèse si nécessaire
+$cahit = new Mechant();
+$quentin = new Mechant(["Quentin","Cahit"]);
 
-var_dump($cahit);
+var_dump($cahit,$quentin);
 
 
 

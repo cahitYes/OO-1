@@ -15,7 +15,6 @@ try {
 $persoManager = new PersonnageManager($db);
 
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,21 +29,21 @@ $persoManager = new PersonnageManager($db);
 <body>
 <?php
 $cahit = new Personnage([
-        "lulu"=>"lala",
-        "youpiCaBoum"=>"yes",
-        "slup"=>25.25,
-        "vie"=>5,
-        25=>"jkhjih",
-        "nom"=>"pause",
+    "lulu" => "lala",
+    "youpiCaBoum" => "yes",
+    "slup" => 25.25,
+    "vie" => 5,
+    25 => "jkhjih",
+    "nom" => "pause",
 ]);
 
 var_dump($cahit);
 
 
-
-?><hr>
+?>
+<hr>
 <?php
-$recupOne = $persoManager->SelectPersonnage(46,'Joelina');
+$recupOne = $persoManager->SelectPersonnage(1, 'Michaël');
 var_dump($recupOne);
 $joueur1 = new Personnage($recupOne);
 var_dump($joueur1);
@@ -52,18 +51,32 @@ var_dump($joueur1);
 <h3>Insertion depuis un formulaire</h3>
 <form action="" method="post" name="balek">
 
-    <input name='nom' type="text" placeholder="votre nom"><br>
-    <input name='forcePerso' type="number" placeholder=forcePerso><br>
-    <input name='degats' type="number" placeholder='degats'><br>
-    <input name='niveau' type="number" placeholder='niveau'><br>
-    <input name='experience' type="number" placeholder='experience'><br>
-    <input name='vie' type="number" placeholder='vie'><br>
-    <input type="submit" value="créer le personnage">
+    <label>
+        <input name='nom' type="text" placeholder="votre nom">
+    </label><br>
+    <label>
+        <input name='forcePerso' type="number" placeholder='forcePerso'>
+    </label><br>
+    <label>
+        <input name='degats' type="number" placeholder='degats'>
+    </label><br>
+    <label>
+        <input name='niveau' type="number" placeholder='niveau'>
+    </label><br>
+    <label>
+        <input name='experience' type="number" placeholder='experience'>
+    </label><br>
+    <label>
+        <input name='vie' type="number" placeholder='vie'>
+    </label><br>
+    <label>
+        <input type="submit" value="créer le personnage">
+    </label>
 </form>
 <?php
 
 // si on a envoyé le formulaire
-if(!empty($_POST)){
+if (!empty($_POST)) {
     // instanciation des valeurs passée par le formulaire
     $insert = new Personnage($_POST);
     var_dump($insert);

@@ -17,4 +17,24 @@ class MechantManager
         return $mechants->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // On veut insérer le nouveau méchant dans le table mechant
+    public function insertMechant(Mechant $lui): bool|string
+    {
+        $sql = "INSERT INTO `mechant` (`nameMechant`, `forceMechant`, `experienceMechant`, `statusMechant`) VALUES (?,?,?,?);";
+        $prepare = $this->db->prepare($sql);
+        try{
+            $prepare->execute([
+                $lui->getNameMechant(),
+                $lui->getForceMechant(),
+                $lui->getExperienceMechant(),
+                $lui->getStatusMechant(),
+                ]);
+            return true;
+        }catch (Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+
+    }
+
 }

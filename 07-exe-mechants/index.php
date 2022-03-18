@@ -14,9 +14,18 @@ try {
 // Instanciation de notre manager avec la connexion PDO
 $mechantManager = new MechantManager($db);
 
+
+//var_dump($_POST);
+//var_dump(new Mechant($_POST));
+
+// si on a envoyé le formulaire
+if(!empty($_POST)){
+    $il = new Mechant($_POST);
+    $insertMechant = $mechantManager->insertMechant($il);
+}
+
 // On va récupérer tous les méchants ordonnés par `experienceMechant` ascendant
 $recupAllMechants = $mechantManager->getMechants();
-
 
 ?>
 <!DOCTYPE html>
@@ -26,11 +35,16 @@ $recupAllMechants = $mechantManager->getMechants();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mechant</title>
 </head>
 
 <body>
 <h3>Insertion depuis un formulaire dans Mechant</h3>
+<?php
+if(isset($insertMechant)):
+    echo ($insertMechant === true)? '<h3>Nouveau méchant créé</h3>': '<h3>Insertion échoué</h3>';
+endif;
+?>
 <form action="" method="post" name="balek">
     <label for="nameMechant">nameMechant : <input type="text" name="nameMechant" id="nameMechant" required></label><br>
     <label for="forceMechant">forceMechant : <input type="number" min="1" max="9999" name="forceMechant"

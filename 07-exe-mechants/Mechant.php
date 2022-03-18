@@ -43,7 +43,7 @@ class Mechant
     private function hydratation(array $tab)
     {
         foreach ($tab as $key => $value) {
-            echo $nameSetter = "set" . ucfirst($key)."('$value')<br>";
+            // echo $nameSetter = "set" . ucfirst($key)."('$value')<br>";
             $setterName = "set".ucfirst($key);
             if(method_exists($this,$setterName)){
                 // utilisation du setter autogénéré

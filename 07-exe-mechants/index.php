@@ -42,7 +42,7 @@ $recupAllMechants = $mechantManager->getMechants();
 <h3>Insertion depuis un formulaire dans Mechant</h3>
 <?php
 if(isset($insertMechant)):
-    echo ($insertMechant === true)? '<h3>Nouveau méchant créé</h3>': '<h3>Insertion échoué</h3>';
+    echo ($insertMechant === true)? '<h3>Nouveau méchant créé</h3>': '<h3>Insertion échoué : '.$insertMechant->getMessage().'</h3>';
 endif;
 ?>
 <form action="" method="post" name="balek">

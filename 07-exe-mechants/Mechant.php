@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // mapping de la table mechant en PHP 8.0
 
 class mechant
@@ -53,6 +54,72 @@ class mechant
      * @return int|null
      */
     public function getIdMechant(): int|null
+=======
+
+/**
+ * Mapping de la table `jeuxoo`.`mechant`
+ */
+class Mechant
+{
+    /**
+     *
+     * Attributs ou propriétés
+     *
+     */
+    private int $idMechant;
+    private string $nameMechant;
+    private int $forceMechant;
+    private int $experienceMechant;
+    private bool|int $statusMechant;
+
+
+
+
+    // Constantes
+
+
+    /**
+     *
+     * Méthodes
+     *
+     */
+
+    /**
+     * Méthodes magiques
+     */
+
+    public function __construct(array $datasMechant = [])
+    {
+        $this->hydratation($datasMechant);
+    }
+
+    /**
+     * Méthode d'hydratation
+     */
+    private function hydratation(array $tab)
+    {
+        foreach ($tab as $key => $value) {
+            // echo $nameSetter = "set" . ucfirst($key)."('$value')<br>";
+            $setterName = "set".ucfirst($key);
+            if(method_exists($this,$setterName)){
+                // utilisation du setter autogénéré
+                $this->$setterName($value);
+            }
+        }
+
+    }
+
+    /**
+     *
+     * getters
+     *
+     */
+
+    /**
+     * @return int
+     */
+    public function getIdMechant(): int
+>>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370
     {
         return $this->idMechant;
     }
@@ -82,13 +149,20 @@ class mechant
     }
 
     /**
+<<<<<<< HEAD
      * @return int
      */
     public function getStatusMechant(): int
+=======
+     * @return bool|int
+     */
+    public function getStatusMechant(): bool|int
+>>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370
     {
         return $this->statusMechant;
     }
 
+<<<<<<< HEAD
 
 
     // setters
@@ -120,10 +194,33 @@ class mechant
         }
 
         return $this;
+=======
+    /**
+     *
+     * setters
+     *
+     */
+
+    /**
+     * @param int $idMechant
+     */
+    public function setIdMechant(int $idMechant): void
+    {
+        $this->idMechant = $idMechant;
+    }
+
+    /**
+     * @param string $nameMechant
+     */
+    public function setNameMechant(string $nameMechant): void
+    {
+        $this->nameMechant = $nameMechant;
+>>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370
     }
 
     /**
      * @param int $forceMechant
+<<<<<<< HEAD
      * @return Mechant
      */
     public function setForceMechant(int $forceMechant): Mechant
@@ -154,3 +251,29 @@ class mechant
 
 
 }
+=======
+     */
+    public function setForceMechant(int $forceMechant): void
+    {
+        $this->forceMechant = $forceMechant;
+    }
+
+    /**
+     * @param int $experienceMechant
+     */
+    public function setExperienceMechant(int $experienceMechant): void
+    {
+        $this->experienceMechant = $experienceMechant;
+    }
+
+    /**
+     * @param bool|int $statusMechant
+     */
+    public function setStatusMechant(bool|int $statusMechant): void
+    {
+        $this->statusMechant = $statusMechant;
+    }
+
+
+}
+>>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370

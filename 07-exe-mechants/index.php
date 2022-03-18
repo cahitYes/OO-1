@@ -1,7 +1,8 @@
 <?php
 // chargement des dépendances
 require_once "config.php";
-// ...
+require_once "Mechant.php";
+require_once "MechantManager.php";
 
 // tentative de connexion à notre DB
 try {
@@ -11,7 +12,7 @@ try {
 }
 
 // Instanciation de notre manager avec la connexion PDO
-// $persoManager = new PersonnageManager($db);
+$mechantManager = new MechantManager($db);
 
 
 
@@ -28,29 +29,47 @@ try {
 
 <body>
 <?php
-$cahit = new Mechant([
-        "lulu"=>"lala",
-        "youpiCaBoum"=>"yes",
-        "slup"=>25.25,
-        "vie"=>5,
-        25=>"jkhjih",
-        "nom"=>"pause",
-]);
 
-var_dump($cahit);
+
+
+$balek = $mechantManager->SelectAllMechant();
 
 
 
 ?><hr>
+<h3>Les mechants existant</h3>
 <?php
-
+foreach($balek as $item):
 ?>
-<h3>Insertion depuis un formulaire dans Mechant</h3>
+<h4><?=$item['nameMechant']?></h4>
+    <p>Force:<?=$item['forceMechant']?> </p>
+    <p>Experience:<?=$item['experienceMechant']?> </p>
+    <p>Status:<?=$item['statusMechant']?> </p>
+<?php
+endforeach;
+?>
+
+<h3>Insertion depuis un formulaire</h3>
 <form action="" method="post" name="balek">
 
+    <input name='nameMechant' type="text" placeholder="votre nom"><br>
+    <input name='forceMechant' type="number" placeholder=forcePerso><br>
+    <input name='experienceMechant' type="number" placeholder='experience'><br>
+    <input name='statusMechant' type="number" placeholder='Status'><br>
+    <input type="submit" value="créer le méchant">
 </form>
+<?php
 
-<h3>Affichez tous les méchants !</h3>
+// si on a envoyé le formulaire
+if(!empty($_POST)){
+    // instanciation des valeurs passée par le formulaire
+    $insert = new Mechant($_POST);
+    // insertion dans la DB
+    echo $mechantManager->insertMechant($insert);
+
+}
+
+?>
 </body>
 
 </html>

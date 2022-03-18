@@ -17,8 +17,8 @@ class MechantManager
         return $mechants->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // On veut insérer le nouveau méchant dans le table mechant
-    public function insertMechant(Mechant $lui): bool|string
+    // On veut insérer le nouveau méchant dans la table mechant - on récupère true ou l'échec
+    public function insertMechant(Mechant $lui): bool|Exception
     {
         $sql = "INSERT INTO `mechant` (`nameMechant`, `forceMechant`, `experienceMechant`, `statusMechant`) VALUES (?,?,?,?);";
         $prepare = $this->db->prepare($sql);
@@ -31,8 +31,7 @@ class MechantManager
                 ]);
             return true;
         }catch (Exception $e){
-            echo $e->getMessage();
-            return false;
+            return $e;
         }
 
     }

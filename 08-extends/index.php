@@ -37,10 +37,10 @@ echo "<hr>";
 
 $magicienVide->frapper($persoVide);
 $persoVide->frapper($magicienVide);
-echo "<hr><p>Surchargé</p>";
+echo "<hr><p>Surchargées</p>";
 $magicienVide->frapper2($persoVide);
 $persoVide->frapper2($magicienVide);
-echo "<hr><p>Écrasé</p>";
+echo "<hr><p>Écrasées</p>";
 $magicienVide->frapper3($persoVide);
 $persoVide->frapper3($magicienVide);
 

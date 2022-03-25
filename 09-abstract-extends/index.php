@@ -8,8 +8,8 @@ require_once "config.php";
 =======
 require_once "config.php";
 require_once "model/MyPDO.php";
-require_once "model/Personnage.php";
-require_once "model/PersonnageManager.php";
+require_once "model/Personnage/Personnage.php";
+require_once "model/Personnage/PersonnageManager.php";
 
 /* tentative de connexion à notre DB avec la classe native PDO
 >>>>>>> 29cf8a288bffea8d13d3e654576bfdba0bf20849

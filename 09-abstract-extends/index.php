@@ -1,8 +1,8 @@
 <?php
 require_once "config.php";
 require_once "model/MyPDO.php";
-require_once "model/Personnage.php";
-require_once "model/PersonnageManager.php";
+require_once "model/Personnage/Personnage.php";
+require_once "model/Personnage/PersonnageManager.php";
 
 /* tentative de connexion à notre DB avec la classe native PDO
 try {

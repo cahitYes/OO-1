@@ -10,4 +10,4 @@ define("DB_PWD","");
 
 // production-> $prod=true
 
-$prod = false;
+define("PROD",false);

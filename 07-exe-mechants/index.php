@@ -39,7 +39,7 @@ $recupAllMechants = $mechantManager->getMechants();
 </head>
 
 <body>
-<<<<<<< HEAD
+
 <?php
 
 
@@ -62,14 +62,13 @@ endforeach;
 ?>
 
 <h3>Insertion depuis un formulaire</h3>
-=======
+
 <h3>Insertion depuis un formulaire dans Mechant</h3>
 <?php
 if(isset($insertMechant)):
     echo ($insertMechant === true)? '<h3>Nouveau méchant créé</h3>': '<h3>Insertion échoué : '.$insertMechant->getMessage().'</h3>';
 endif;
 ?>
->>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370
 <form action="" method="post" name="balek">
     <label for="nameMechant">nameMechant : <input type="text" name="nameMechant" id="nameMechant" required></label><br>
     <label for="forceMechant">forceMechant : <input type="number" min="1" max="9999" name="forceMechant"
@@ -80,16 +79,15 @@ endif;
             <option value="1">Actif</option>
             <option value="0">Non Actif</option>
         </select></label><br>
-    <input type="submit" value="create Mechant !">
+    <input type="submit" value="create Mechant ">
 
     <input name='nameMechant' type="text" placeholder="votre nom"><br>
-    <input name='forceMechant' type="number" placeholder=forcePerso><br>
+    <input name='forceMechant' type="number" placeholder="forcePerso"><br>
     <input name='experienceMechant' type="number" placeholder='experience'><br>
     <input name='statusMechant' type="number" placeholder='Status'><br>
     <input type="submit" value="créer le méchant">
 </form>
 <?php
-<<<<<<< HEAD
 
 // si on a envoyé le formulaire
 if(!empty($_POST)){
@@ -100,8 +98,7 @@ if(!empty($_POST)){
 
 }
 
-?>
-=======
+?
 
 
 ?>
@@ -119,7 +116,7 @@ endforeach;
 ?>
 
 
->>>>>>> c59ca19335958ff6f8677487b54dcb48df5b3370
+
 </body>
 
 </html>

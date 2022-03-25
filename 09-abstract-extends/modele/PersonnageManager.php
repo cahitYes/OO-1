@@ -3,15 +3,15 @@
 class PersonnageManager
 {
     // Attributs
-    private PDO $connection;
+    private MyPDO $connection;
 
     // Méthodes
 
     // constructeur
     /**
-     * @param PDO $connection
+     * @param MyPDO $connection
      */
-    public function __construct(PDO $connection)
+    public function __construct(MyPDO $connection)
     {
         $this->connection = $connection;
     }

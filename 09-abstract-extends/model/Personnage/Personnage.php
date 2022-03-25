@@ -1,16 +1,17 @@
 <?php
 // mapping de la table personnage en PHP 8.0
-
-class Personnage
+// le abstract devant le nom de la classe empèche l'instanciation de celle-ci
+abstract class Personnage
 {
-    // Attributs ou propriétés, en général toujours private (ou protected qu'on verra lors des extends) - À partir de PHP 7.4, on type nos attributs : https://www.php.net/manual/fr/migration74.new-features.php
-    private int|null $idPersonnage; // le choix est possible autrement qu'avec ?int (int ou null en php 7)
-    private string $nom;
-    private int $forcePerso;
-    private float $degats;
-    private int $niveau;
-    private int $experience;
-    private int $vie;
+    // Attributs ou propriétés, en général toujours protected (ou private) - À partir de PHP 7.4, on type nos attributs : https://www.php.net/manual/fr/migration74.new-features.php
+    protected int|null $idPersonnage; // le choix est possible autrement qu'avec ?int (int ou null en php 7)
+    protected string $nom;
+    protected int $forcePerso;
+    protected float $degats;
+    protected int $niveau;
+    protected int $experience;
+    protected int $vie;
+    protected int|null $theclassID;
 
     // constantes Modificatrices de visibilité des constantes de classe, à partir de PHP 7.1 : https://www.php.net/manual/fr/language.oop5.constants.php
     public const VIE_DE_BASE = 1000;
@@ -27,7 +28,7 @@ class Personnage
     }
 
     // création de notre hydratation, en partant d'un tableau associatif et de ses clefs, on va régénérer le nom des setters existants
-    private function hydrate(array $assoc){
+    protected function hydrate(array $assoc){
         // tant qu'on a des éléments dans le tableau
         foreach($assoc as $clef => $valeur){
             // création du nom de la méthode
@@ -43,7 +44,7 @@ class Personnage
      * si on essaye d'afficher l'instance comme du texte
      * @return string
      */
-    public function __toString(): string
+    public  function __toString(): string
     {
         return "Je suis une instance de " . $this->getNom();
     }
@@ -106,6 +107,16 @@ class Personnage
         return $this->vie;
     }
 
+    /**
+     * @return int|null
+     */
+    public function getTheclassID(): ?int
+    {
+        return $this->theclassID;
+    }
+
+
+
 
 
     // setters
@@ -119,7 +130,6 @@ class Personnage
         $this->idPersonnage = $idPersonnage;
         return $this;
     }
-
 
     /**
      * @param string $nom
@@ -188,6 +198,37 @@ class Personnage
         $this->vie = $vie;
         return $this;
     }
+
+    /**
+     * @param int|null $theclassID
+     * @return Personnage
+     */
+    public function setTheclassID(?int $theclassID): Personnage
+    {
+        $this->theclassID = $theclassID;
+        return $this;
+    }
+
+    /*
+     * Créations de méthodes abstraites, qui doivent être redéfinies pour être fonctionnelles dans les enfants !
+     */
+    abstract public function frapper($autre);
+
+    abstract public function parer($autre);
+
+    abstract public function esquiver($autre);
+
+    abstract public function soigner($autre);
+
+    abstract protected function mourir($autre);
+
+    abstract protected function updateNiveau($autre);
+
+    abstract protected function updateExperience($autre);
+
+    abstract protected function updateVie($autre);
+
+
 
 
 }

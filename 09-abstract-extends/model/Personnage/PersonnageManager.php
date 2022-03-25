@@ -3,15 +3,15 @@
 class PersonnageManager
 {
     // Attributs
-    private PDO $connection;
+    private MyPDO $connection;
 
     // Méthodes
 
     // constructeur
     /**
-     * @param PDO $connection
+     * @param MyPDO $connection
      */
-    public function __construct(PDO $connection)
+    public function __construct(MyPDO $connection)
     {
         $this->connection = $connection;
     }
@@ -41,9 +41,18 @@ class PersonnageManager
 
     }
 
+    // ne fonctionne plus avec MyPDO
     public function SelectAllPersonnage(): array{
         $sql = "SELECT * FROM `personnage` ORDER BY `idPersonnage` ASC";
         $request = $this->connection->query($sql);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // fonctionne avec MyPDO
+    public function SelectAllMyPersonnage(): array{
+        $sql = "SELECT * FROM `personnage` ORDER BY `idPersonnage` ASC";
+        $request = $this->connection->prepare($sql);
+        $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 

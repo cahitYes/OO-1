@@ -4,6 +4,7 @@ require_once "model/MyPDO.php";
 require_once "model/Personnage/Personnage.php";
 require_once "model/Personnage/PersonnageManager.php";
 
+
 /* tentative de connexion à notre DB avec la classe native PDO
 try {
     $connectPDO = new PDO(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=' . DB_CHARSET . ';port=' . DB_PORT, DB_LOGIN, DB_PWD);
@@ -38,6 +39,15 @@ echo"<h3>Modification en requête préparée, va fonctionner</h3>";
 $recup = $PersonnageManager->SelectAllMyPersonnage();
 
 var_dump($recup);
+?>
+<a href="suite.php">La suite</a>
+<?php
+echo"<h3>La classe Personnage n'est plus instantiable dès qu'elle devient abstraite</h3>";
+$perso = new Personnage([]);
+var_dump($perso);
+
+?>
+
 
 
 

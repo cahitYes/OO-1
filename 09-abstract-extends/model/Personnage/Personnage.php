@@ -1,7 +1,7 @@
 <?php
 // mapping de la table personnage en PHP 8.0
-
-class Personnage
+// le abstract devant le nom de la classe empèche l'instanciation de celle-ci
+abstract class Personnage
 {
     // Attributs ou propriétés, en général toujours protected (ou private) - À partir de PHP 7.4, on type nos attributs : https://www.php.net/manual/fr/migration74.new-features.php
     protected int|null $idPersonnage; // le choix est possible autrement qu'avec ?int (int ou null en php 7)
@@ -44,7 +44,7 @@ class Personnage
      * si on essaye d'afficher l'instance comme du texte
      * @return string
      */
-    public function __toString(): string
+    public  function __toString(): string
     {
         return "Je suis une instance de " . $this->getNom();
     }
@@ -208,6 +208,27 @@ class Personnage
         $this->theclassID = $theclassID;
         return $this;
     }
+
+    /*
+     * Créations de méthodes abstraites, qui doivent être redéfinies pour être fonctionnelles dans les enfants !
+     */
+    abstract public function frapper($autre);
+
+    abstract public function parer($autre);
+
+    abstract public function esquiver($autre);
+
+    abstract public function soigner($autre);
+
+    abstract protected function mourir($autre);
+
+    abstract protected function updateNiveau($autre);
+
+    abstract protected function updateExperience($autre);
+
+    abstract protected function updateVie($autre);
+
+
 
 
 }

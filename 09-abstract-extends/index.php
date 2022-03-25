@@ -13,7 +13,7 @@ try {
 
 // tentative de connexion à notre DB avec notre classe étendue de PDO : MyPDO
 try {
-    $connectMyPDO = new MyPDO(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=' . DB_CHARSET . ';port=' . DB_PORT, DB_LOGIN, DB_PWD, null, );
+    $connectMyPDO = new MyPDO(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=' . DB_CHARSET . ';port=' . DB_PORT, DB_LOGIN, DB_PWD, null, PROD);
 } catch (Exception $e) {
     die($e->getMessage());
 }

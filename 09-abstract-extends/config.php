@@ -8,5 +8,5 @@ define("DB_CHARSET","utf8");
 define("DB_LOGIN","root");
 define("DB_PWD","");
 
-// Production -> $prod=true
-$prod=false;
+// Production -> PROD = true (Désactivation de l'affichage des erreurs SQL)
+define("PROD",false);

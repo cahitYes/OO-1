@@ -16,5 +16,13 @@ class MyPDO extends PDO
         }
     }
 
+    // écrasement du query venant du parent (PDO)
+    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args) : Exception
+    {
+        // affichage de l'erreur
+        throw new Exception("Query est désactivé dans MyPDO, veuillez utiliser une requête préparée");
+
+    }
+
 
 }

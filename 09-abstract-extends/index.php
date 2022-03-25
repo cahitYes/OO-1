@@ -4,12 +4,13 @@ require_once "model/MyPDO.php";
 require_once "model/Personnage.php";
 require_once "model/PersonnageManager.php";
 
-// tentative de connexion à notre DB avec la classe native PDO
+/* tentative de connexion à notre DB avec la classe native PDO
 try {
     $connectPDO = new PDO(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=' . DB_CHARSET . ';port=' . DB_PORT, DB_LOGIN, DB_PWD);
 } catch (Exception $e) {
     die($e->getMessage());
 }
+*/
 
 // tentative de connexion à notre DB avec notre classe étendue de PDO : MyPDO
 try {
@@ -18,6 +19,27 @@ try {
     die($e->getMessage());
 }
 
-var_dump($connectPDO,$connectMyPDO);
+// on va instancier le manager de Personnage avec notre instance de MyPDO
+$PersonnageManager = new PersonnageManager($connectMyPDO);
 
-?>
+/* Le manager veut une connexion de type MyPDO !
+$PersonnageManager2 = new PersonnageManager($connectPDO);
+*/
+echo "<h3>Surcharge de PDO grâce à MyPDO</h3><p>Utilisation de MyPDO dans le manager pour ne pouvoir utiliser que MyPDO pour travailler sur notre code (plugin, CMS, ...)";
+var_dump($connectMyPDO,$PersonnageManager);
+
+echo"<h3>Utilisation d'un query, ne fonctionne plus si on écrase la méthode query de PDO</h3>";
+try {
+    $PersonnageManager->SelectAllPersonnage();
+}catch(Exception $e){
+    echo $e->getMessage();
+}
+echo"<h3>Modification en requête préparée, va fonctionner</h3>";
+$recup = $PersonnageManager->SelectAllMyPersonnage();
+
+var_dump($recup);
+
+
+
+
+
